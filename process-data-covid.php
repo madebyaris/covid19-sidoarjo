@@ -59,7 +59,7 @@ class Covid19 {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
         $output = curl_exec($ch);
         curl_close($ch);
-        $data = $output;
+        $data = json_decode($output);
         return $data;
     }
 
