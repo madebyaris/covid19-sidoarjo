@@ -1,0 +1,11 @@
+{
+    "name": "madebyaris/covid19sidoarjo",
+    "type": "app",
+    "license": "MIT",
+    "description": "Grabbing Covid19 data from Sidoarjo covid website : https://covid19.sidoarjokab.go.id/",
+    "homepage": "http://madebyaris.com",
+    "require": {
+        "voku/simple_html_dom": "^4.7",
+        "voku/portable-utf8": "^5.4"
+    }
+}
