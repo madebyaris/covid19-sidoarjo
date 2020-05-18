@@ -4,7 +4,6 @@
  * See all the comments below for documentation.
  */
 
-require 'vendor/autoload.php';
 use voku\helper\HtmlDomParser as parser;
 class Covid19 {
 
@@ -150,9 +149,4 @@ class Covid19 {
 
 
 }
-
-$run = new Covid19;
-$run->create_json_total_data_covid();
-$run->create_json_per_kecamatan();
-
 ?>

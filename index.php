@@ -1,30 +1,31 @@
 <?php
-    // hemmm
-?>
-<!doctype>
-<html>
-    <head>
-        <title>Grabber COVID19 Sidoarjo</title>
-    </head>
+// Load the autoloader
+require 'vendor/autoload.php';
 
-    <body>
-        <code>
-            Untuk Mempelajari lebih lanjut prihal app ini.<br>
-            silah klik tautan berikut <a href="https://github.com/madebyaris/covid19-sidoarjo">https://github.com/madebyaris/covid19-sidoarjo</a>
-        </code> 
+$router = new AltoRouter();
 
-        <pre>
-_________    ______                       _____        
-_______ _________ ______  /_______  /______  _______ __________(_)_______
-__  __ `__ \  __ `/  __  /_  _ \_  __ \_  / / /  __ `/_  ___/_  /__  ___/
-_  / / / / / /_/ // /_/ / /  __/  /_/ /  /_/ // /_/ /_  /   _  / _(__  ) 
-/_/ /_/ /_/\__,_/ \__,_/  \___//_.___/_\__, / \__,_/ /_/    /_/  /____/  
-                                      /____/                             
-</pre>
-<code>copyright by madebyaris.com</code>
-        <script type='text/javascript'>
-            console.log('Hay, Want to hire me? send me your best brieft to arissetia.m@gmail.com')
-        </script>
-    </body>
+$router->map( 'GET', '/', function () {
+     require 'front-page.php';
+});
 
-</html>
+$router->map( 'GET', '/process-data/', function () {
+     $key = 'ini_kunci';
+     if ( isset( $_GET['key'] ) && $_GET['key'] === $key ) {
+          require 'process-data-covid.php';
+          $process = new Covid19;
+          $process->create_json_total_data_covid();
+          $process->create_json_per_kecamatan();
+     } else {
+          echo "what are you doing here?";
+     }
+});
+
+$match = $router->match();
+
+// call closure or throw 404 status
+if( is_array($match) && is_callable( $match['target'] ) ) {
+	call_user_func_array( $match['target'], $match['params'] ); 
+} else {
+	// no route was matched
+	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+}
