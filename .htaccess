@@ -1,0 +1,23 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]
+
+<IfModule mod_gzip.c>
+mod_gzip_on Yes
+mod_gzip_item_include file .html$
+mod_gzip_item_include file .php$
+mod_gzip_item_include file .css$
+mod_gzip_item_include file .js$
+mod_gzip_item_include mime ^application/javascript$
+mod_gzip_item_include mime ^application/x-javascript$
+mod_gzip_item_include mime ^text/.*
+mod_gzip_item_include handler ^application/x-httpd-php
+mod_gzip_item_exclude mime ^image/.*
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set owner Aris_Setiawan
+  Header set email arissetia.m@gmail.com
+  Header set website madebyaris.com
+  Header set Status hireable 
+</IfModule>
